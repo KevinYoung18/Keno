@@ -1,9 +1,13 @@
 package games.keno;
 
+import java.util.ArrayList;
+
 public class Card 
 {
 	double[] odds;
 	boolean[] spots = new boolean[Keno.SIZE];
+	
+	
 	
 	Card(int[] bets)
 	{
@@ -16,6 +20,18 @@ public class Card
 			spots[bet] = true;
 		}
 		odds = Odds.get(bets.length);
+	}
+	Card(ArrayList<Integer> bets)
+	{
+		for(int bet: bets)
+		{
+			if(bet <= 0 || bet >= Keno.SIZE)
+			{
+				throw new IndexOutOfBoundsException("Bets must be from 1-80");
+			}
+			spots[bet] = true;
+		}
+		odds = Odds.get(bets.size());
 	}
 	
 	// @param	betAmount		the amount to bet on this card
@@ -39,6 +55,24 @@ public class Card
 		double multiplier = odds[matches];
 		
 		return betAmount * multiplier;
+	}
+	
+	@Override
+	public String toString()
+	{
+		String str = "";
+		for(int i = 1; i < Keno.SIZE; i++)
+		{
+			if(spots[i]) { str += "X\t"; }
+			else { str += i + "\t"; }
+			
+			if(i % 10 == 0) 
+			{ 
+				str += System.lineSeparator(); 
+				if(i % 40 == 0 ) { str += System.lineSeparator(); }
+			}
+		}
+		return str;
 	}
 	
 }

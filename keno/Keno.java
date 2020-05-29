@@ -20,13 +20,14 @@ public class Keno
 	}
 	
 	// @param	betAmount		the amount to bet on each card
+	// @return					the amount won
 	//	adds the winnings from each card back to credits
-	public void play(double betAmount)
+	public double play(double betAmount)
 	{
 		double totalBet = betAmount * cards.size();
-		if(totalBet > credits)
+		if(totalBet >= credits)
 		{
-			//TODO throw exeption
+			throw new IllegalArgumentException("Bets must be less than or equal to the amount of credits");
 		}
 		else
 		{
@@ -44,9 +45,26 @@ public class Keno
 		
 		//add winnings back to credits
 		credits += winnings;
+		return winnings;
 		
 	}
 	
+	public void removeCard(int index)
+	{
+		cards.remove(index);
+	}
+	
+	public int getNumOfCards()
+	{
+		return cards.size();
+	}
+	
+	public double getCredits()
+	{
+		return credits;
+	}
+	
+	// @returns 		an array of winning numbers
 	private int[] getWinningNumbers()
 	{
 		int[] numbers = new int[20];
