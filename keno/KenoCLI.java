@@ -11,18 +11,16 @@ public class KenoCLI
 	public static void main(String[] args) 
 	{
 		keno = new Keno(1000);
-		
 		Scanner kb = new Scanner(System.in);
 		
-		//get cards
 		getCards(kb);
-		
-		//
 		getBets(kb);
 		
 		kb.close();
 		
 	}
+	
+	//get all bets from command line
 	private static void getBets(Scanner kb)
 	{
 		while(true)
@@ -32,6 +30,7 @@ public class KenoCLI
 		}
 	}
 	
+	//get single bet from command line
 	private static boolean getBet(Scanner kb)
 	{
 		
@@ -40,13 +39,19 @@ public class KenoCLI
 		String input = kb.nextLine();
 		if(input.equalsIgnoreCase("e"))
 		{
-			
 			return true;
 		}
 		else
 		{
+			try
+			{
 			int bet = Integer.parseInt(input);
 			System.out.println("Amount won: " + keno.play(bet));
+			}
+			catch(NumberFormatException e)
+			{
+				System.out.println("Invalid input");
+			}
 		}
 		System.out.println("Credits: " + keno.getCredits());
 			
@@ -83,11 +88,10 @@ public class KenoCLI
 			String str = parser.next();
 			
 			// handle numbers
-			//TODO handle too many shots
 			try
 			{
 				Integer num = Integer.parseInt(str);
-				if(num < 1 || num >= Keno.SIZE)
+				if(num < 1 || num >= Keno.SIZE || shots.size() > Odds.MAX_SHOTS)
 				{
 					throw new NumberFormatException();
 				}

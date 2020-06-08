@@ -17,11 +17,12 @@ public class Odds
 			{2, 0, 0, 0, 0, 1, 10, 50, 250, 1500, 15000, 500000},
 			{4, 0, 0, 0, 0, 0, 5, 25, 150, 1000, 2500, 25000, 1000000}
 	};
+	final static int MAX_SHOTS = odds.length - 1;
 	
 	// return the multiplier for number of shots and the number of matches
 	public static double get(int shots, int match)
 	{
-		if(shots <= 0 || shots >= odds.length)
+		if(shots <= 0 || shots >= MAX_SHOTS)
 		{
 			throw new IndexOutOfBoundsException("Invalid number of shots");
 		}
@@ -37,5 +38,6 @@ public class Odds
 		}
 		return odds[shots];
 	}
+	
 
 }

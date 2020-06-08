@@ -37,7 +37,7 @@ public class Card
 	// @param	betAmount		the amount to bet on this card
 	// @param	winningNumbers	an array of all the winning numbers
 	// @return					the amount won based on the amount of matches and betAmount
-	public double getWinnings(double betAmount, int[] winningNumbers)
+	public double getWinnings(double betAmount, ArrayList<Integer> winningNumbers)
 	{
 		int matches = 0;
 		for(int number: winningNumbers)

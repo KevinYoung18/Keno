@@ -34,7 +34,7 @@ public class Keno
 			credits -= totalBet;
 		}
 		
-		int[] winningNumbers = getWinningNumbers();
+		ArrayList<Integer> winningNumbers = getWinningNumbers();
 		
 		// get winnings from each card
 		double winnings = 0.0;
@@ -65,14 +65,19 @@ public class Keno
 	}
 	
 	// @returns 		an array of winning numbers
-	private int[] getWinningNumbers()
+	private ArrayList<Integer> getWinningNumbers()
 	{
-		int[] numbers = new int[20];
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
 		Random rand = new Random();
 		
-		for(int i = 0; i < numbers.length; i++)
+		for(int i = 0; i < 20; i++)
 		{
-			numbers[i] = rand.nextInt(SIZE-1) + 1;
+			int randNum = rand.nextInt(SIZE-1) + 1;
+			while(numbers.contains(randNum))
+			{
+				randNum = rand.nextInt(SIZE-1) + 1;
+			}
+			numbers.add(randNum);
 		}
 		
 		return numbers;
